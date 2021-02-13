@@ -42,11 +42,15 @@ export class SignupComponent implements OnInit {
           return;
       }
 
+      console.log("que viene aca" + JSON.stringify(this.registerForm.get("username").value));
+      
+
       this.loading = true;
       this.userService.register(this.registerForm.value)
           .pipe(first())
           .subscribe(
               data => {
+                  console.log("que vien en data? ", data);
                   this.router.navigate(['/login']);
               },
               error => {
