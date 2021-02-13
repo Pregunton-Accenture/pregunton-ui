@@ -8,6 +8,9 @@ import { HomeComponent } from './component/home/home.component';
 import { LoginComponent } from './component/user/login/login.component';
 import { SignupComponent } from './component/user/signup/signup.component';
 import { appRoutingModule } from './app.routing';
+import { CreateRoomComponent } from './pregunton/create/create-room/create-room.component';
+import { JoinRoomComponent } from './component/pregunton/join/join-room/join-room.component';
+import { GameComponent } from './component/pregunton/game/game.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +18,9 @@ import { appRoutingModule } from './app.routing';
     LoginComponent,
     SignupComponent,
     HomeComponent,
+    CreateRoomComponent,
+    JoinRoomComponent,
+    GameComponent,
   ],
   imports: [
     BrowserModule,
