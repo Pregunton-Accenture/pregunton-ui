@@ -11,6 +11,7 @@ import { appRoutingModule } from './app.routing';
 import { CreateRoomComponent } from './component/pregunton/create/create-room.component';
 import { JoinRoomComponent } from './component/pregunton/join/join-room.component';
 import { GameComponent } from './component/pregunton/game/game.component';
+import { MasterComponent } from './component/pregunton/master/master.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { GameComponent } from './component/pregunton/game/game.component';
     CreateRoomComponent,
     JoinRoomComponent,
     GameComponent,
+    MasterComponent,
   ],
   imports: [
     BrowserModule,

@@ -10,30 +10,34 @@ import { first } from 'rxjs/operators';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  currentUser: User;
-  users = [];
+    joinRoomForm: FormGroup;
+    loading = false;
+    submitted = false;
 
-  constructor(
-      private authenticationService: AuthenticationService,
-      private userService: UserService
-  ) {
-      this.currentUser = this.authenticationService.currentUserValue;
-  }
+    constructor(
+    private formBuilder: FormBuilder,
+    private route: ActivatedRoute,
+    private router: Router
+    ) {
 
-  ngOnInit() {
-      this.loadAllUsers();
-  }
+    }
 
-  deleteUser(id: number) {
-      this.userService.delete(id)
-          .pipe(first())
-          .subscribe(() => this.loadAllUsers());
-  }
+    ngOnInit() {
+        this.joinRoomForm = this.formBuilder.group({
+            code: ['', Validators.required],
+        });
+    }
 
-  private loadAllUsers() {
-      this.userService.getAll()
-          .pipe(first())
-          .subscribe(users => this.users = users);
-  }
-  
+    get f() { return this.joinRoomForm.controls; }
+
+    onSubmit() {
+        this.loading = true;
+
+        if (this.joinRoomForm.invalid) {
+            this.loading = false;
+            return;
+        }
+
+        this.loading = false;
+    }
 }

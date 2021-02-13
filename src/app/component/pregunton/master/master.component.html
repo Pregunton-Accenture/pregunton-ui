@@ -1,0 +1,15 @@
+<header>
+    <div>
+        <span>Código: {{ game.code }}</span>
+    </div>
+</header>
+<section>
+    <article *ngFor="let item of unansweredQuestions">
+        <p>{{ item.question }}</p>
+        <footer>
+            <button (click)="answerQuestion(item.id, 'SI')">Si</button>
+            <button (click)="answerQuestion(item.id, 'TAL_VEZ')">Tal vez</button>
+            <button (click)="answerQuestion(item.id, 'NO')">No</button>
+        </footer>
+    </article>
+</section>

@@ -11,14 +11,13 @@ import { first } from 'rxjs/operators';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
-  returnUrl: string;
+  returnUrl: string = "/";
   loading = false;
   submitted = false;
   
   constructor(
     private formBuilder: FormBuilder,
     private authenticationService: AuthenticationService,
-    private route: ActivatedRoute,
     private router: Router
   ) {
     
@@ -29,24 +28,24 @@ export class LoginComponent implements OnInit {
       username: ['', Validators.required],
       password: ['', Validators.required]
     });
-
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
   get f() { return this.loginForm.controls; }
 
   onSubmit() {
     this.submitted = true;
+    this.loading = true;
 
     if (this.loginForm.invalid) {
+        this.loading = false;
         return;
     }
 
-    this.loading = true;
     this.authenticationService.login(this.f.username.value, this.f.password.value)
       .pipe(first())
       .subscribe(
         data => {
+            this.loading = false;
             this.router.navigate([this.returnUrl]);
         },
         error => {
