@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Game } from 'src/app/model/game';
 import { Question } from 'src/app/model/question';
+import { PlayerService } from '../../../service/player.service';
 
 @Component({
   selector: 'app-game',
@@ -13,10 +13,12 @@ export class GameComponent implements OnInit {
   loading = false;
   submitted = false;
   code: string;
+  nickname: string;
   questions: Question[];
   
   constructor(
     private formBuilder: FormBuilder,
+    private playerService: PlayerService
   ) {
     
   }
@@ -26,6 +28,7 @@ export class GameComponent implements OnInit {
       questionGuess: ['', Validators.required],
     });
     this.code = localStorage.getItem('game-code');
+    this.nickname = localStorage.getItem('username');
     this.questions = [];
   }
 
@@ -34,12 +37,14 @@ export class GameComponent implements OnInit {
   askQuestion() {
     this._onSubmit(() => {
       const question = this.f.questionGuess.value;
+      this.playerService.askQuestion(this.nickname, question);
     });
   }
 
   makeGuess() {
     this._onSubmit(() => {
       const guess = this.f.questionGuess.value;
+      this.playerService.makeAGuess(this.nickname, guess);
     });
   }
 

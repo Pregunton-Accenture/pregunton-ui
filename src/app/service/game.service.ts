@@ -6,7 +6,7 @@ import { QuestionDto } from '../model/questionDto';
 import { GameDto } from '../model/gameDto';
 
 @Injectable({providedIn: 'root'})
-export class GameServiceService {
+export class GameService {
 
   constructor(private http: HttpClient) { }
 

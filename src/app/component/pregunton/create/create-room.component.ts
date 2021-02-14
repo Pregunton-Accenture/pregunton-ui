@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Game } from 'src/app/model/game';
 import { Category } from 'src/app/model/category';
+import { GameService } from '../../../service/game.service';
 
 @Component({
   selector: 'app-create-room',
@@ -17,7 +18,8 @@ export class CreateRoomComponent implements OnInit {
   
   constructor(
     private formBuilder: FormBuilder,
-    private router: Router
+    private router: Router,
+    private gameService: GameService
   ) {
     
   }
@@ -49,7 +51,9 @@ export class CreateRoomComponent implements OnInit {
         hitLimit: this.f.hitLimit.value,
         questionLimit: this.f.questionLimit.value
       }
+      
     };
+    this.gameService.createGame(game);
 
     this.router.navigate(['/game/control']);
     this.loading = false;

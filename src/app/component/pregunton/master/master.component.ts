@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Game } from 'src/app/model/game';
 import { Question } from 'src/app/model/question';
+import { QuestionService } from '../../../service/question.service';
+import { QuestionDto } from '../../../model/questionDto';
 
 @Component({
   selector: 'app-master',
@@ -9,9 +11,10 @@ import { Question } from 'src/app/model/question';
 })
 export class MasterComponent implements OnInit {
   game: Game;
+  questionDto: QuestionDto;
   unansweredQuestions: Question[];
 
-  constructor() { }
+  constructor(private questionService: QuestionService) { }
 
   ngOnInit(): void {
     this.game = {
@@ -26,6 +29,8 @@ export class MasterComponent implements OnInit {
   }
 
   answerQuestion(questionId: number, answer: string) {
-
+    this.questionDto.id = questionId;
+    this.questionDto.answer = answer;
+    this.questionService.answerQuestion(this.questionDto);
   }
 }

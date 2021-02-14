@@ -1,5 +1,5 @@
-import { Answer } from './answer';
 export class QuestionDto {
+    id: number;
     question: string;
-    answer: Answer;
+    answer: string;
 }

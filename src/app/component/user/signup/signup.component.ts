@@ -11,46 +11,6 @@ import { UserService } from '../../../service/user.service';
     styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
-<<<<<<< HEAD
-  registerForm: FormGroup;
-  loading = false;
-  submitted = false;
-
-  constructor(
-      private formBuilder: FormBuilder,
-      private router: Router,
-      private authenticationService: AuthenticationService,
-      private userService: UserService
-  ) { }
-
-  ngOnInit() {
-      this.registerForm = this.formBuilder.group({
-          username: ['', Validators.required],
-          password: ['', [Validators.required, Validators.minLength(6)]]
-      });
-  }
-
-  get f() { return this.registerForm.controls; }
-
-  onSubmit() {
-      this.submitted = true;
-
-      if (this.registerForm.invalid) {
-          return;
-      }
-
-      this.loading = true;
-      this.userService.register(this.registerForm.value)
-          .pipe(first())
-          .subscribe(
-              data => {
-                  this.router.navigate(['/login']);
-              },
-              error => {
-                  this.loading = false;
-              });
-  }
-=======
     registerForm: FormGroup;
     loading = false;
     submitted = false;
@@ -85,5 +45,4 @@ export class SignupComponent implements OnInit {
                 () => this.router.navigate(['/login']),
                 () => this.loading = false);
     }
->>>>>>> 2454c2068e4759ce15d9add667ad8f6f9413d63a
 }
