@@ -1,0 +1,30 @@
+<header>
+    <div>
+        <span>Código: {{ code }}</span>
+    </div>
+</header>
+<section>
+    <article *ngFor="let item of questions">
+        <p>{{ item.question }}</p>
+        <p>Respuesta: {{ item.answer }}</p>
+    </article>
+</section>
+<footer>
+    <form [formGroup]="questionGuessForm">
+        <div class="form-group">
+            <input type="text" formControlName="questionGuess" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.questionGuess.errors }" />
+            <div *ngIf="submitted && f.questionGuess.errors" class="invalid-feedback">
+                <div *ngIf="f.questionGuess.errors.required">* El campo es requerido</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <button [disabled]="loading" class="btn btn-primary" (click)="askQuestion()">
+                Preguntar
+            </button>
+            <button [disabled]="loading" class="btn btn-primary" (click)="makeGuess()">
+                Adivinar
+            </button>
+            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+        </div>
+    </form>
+</footer>

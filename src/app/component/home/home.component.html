@@ -1,0 +1,16 @@
+<form [formGroup]="joinRoomForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+        <label for="code">Código de la Sala</label>
+        <input type="text" formControlName="code" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.code.errors }" />
+        <div *ngIf="submitted && f.code.errors" class="invalid-feedback">
+            <div *ngIf="f.code.errors.required">* El código es requerido</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <button type="submit" [disabled]="loading" class="btn btn-primary">
+            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+            Unirse a la sala
+        </button>
+    </div>
+</form>
+<a routerLink="/room/create" class="btn btn-link">Crear sala</a>
