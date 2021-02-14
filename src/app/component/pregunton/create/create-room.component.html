@@ -8,10 +8,6 @@
                 <div *ngIf="f.guess.errors.required">* La palabra a adivinar es requerida</div>
             </div>
         </div>
-        <label for="category">Categoría</label>
-        <select formControlName="category" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.category.errors }">
-            <option value="item.id" *ngFor="let item of categoryList">{{ item.name }}</option>
-        </select>
         <div *ngIf="submitted && f.category.errors" class="invalid-feedback">
             <div *ngIf="f.category.errors.required">* La categoría es requerida</div>
         </div>

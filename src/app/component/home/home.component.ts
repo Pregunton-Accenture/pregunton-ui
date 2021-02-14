@@ -3,6 +3,8 @@ import { User } from '../../model/user';
 import { AuthenticationService } from '../../service/authentication.service';
 import { UserService } from '../../service/user.service';
 import { first } from 'rxjs/operators';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
