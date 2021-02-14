@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Game } from 'src/app/model/game';
+import { Category } from 'src/app/model/category';
 
 @Component({
   selector: 'app-create-room',
@@ -11,10 +13,10 @@ export class CreateRoomComponent implements OnInit {
   createRoomForm: FormGroup;
   loading = false;
   submitted = false;
+  categoryList: Category[] = [];
   
   constructor(
     private formBuilder: FormBuilder,
-    private route: ActivatedRoute,
     private router: Router
   ) {
     
@@ -28,6 +30,7 @@ export class CreateRoomComponent implements OnInit {
       questionLimit: ['', [ Validators.required, Validators.min(1), Validators.max(200) ]],
     });
 
+    this.categoryList = [];
   }
 
   get f() { return this.createRoomForm.controls; }
@@ -40,6 +43,15 @@ export class CreateRoomComponent implements OnInit {
         return;
     }
 
+    const game: Game = {
+      hit: this.f.guess.value,
+      rules: {
+        hitLimit: this.f.hitLimit.value,
+        questionLimit: this.f.questionLimit.value
+      }
+    };
+
+    this.router.navigate(['/game/control']);
     this.loading = false;
   }
 }

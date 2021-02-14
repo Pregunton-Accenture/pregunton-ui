@@ -40,6 +40,8 @@ export class HomeComponent implements OnInit {
             return;
         }
 
+        const code = this.f.code.value;
+        this.router.navigate(['/game']);
         this.loading = false;
     }
 }

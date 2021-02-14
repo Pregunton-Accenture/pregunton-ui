@@ -1,6 +1,7 @@
-import { Rules } from './rule';
+import { Rules } from "./rules";
+
 export class Game {
-    code: string;
+    code?: string;
     hit: string;
-    rules: Rules[];
+    rules: Rules;
 }
