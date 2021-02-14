@@ -6,51 +6,43 @@ import { first } from 'rxjs/operators';
 import { UserService } from '../../../service/user.service';
 
 @Component({
-  selector: 'app-signup',
-  templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.css']
+    selector: 'app-signup',
+    templateUrl: './signup.component.html',
+    styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
-  registerForm: FormGroup;
-  loading = false;
-  submitted = false;
+    registerForm: FormGroup;
+    loading = false;
+    submitted = false;
 
-  constructor(
-      private formBuilder: FormBuilder,
-      private router: Router,
-      private authenticationService: AuthenticationService,
-      private userService: UserService
-  ) { }
+    constructor(
+        private formBuilder: FormBuilder,
+        private router: Router,
+        private authenticationService: AuthenticationService,
+        private userService: UserService
+    ) { }
 
-  ngOnInit() {
-      this.registerForm = this.formBuilder.group({
-          username: ['', Validators.required],
-          password: ['', [Validators.required, Validators.minLength(6)]]
-      });
-  }
+    ngOnInit() {
+        this.registerForm = this.formBuilder.group({
+            username: ['', Validators.required],
+            password: ['', [Validators.required, Validators.minLength(6)]]
+        });
+    }
 
-  get f() { return this.registerForm.controls; }
+    get f() { return this.registerForm.controls; }
 
-  onSubmit() {
-      this.submitted = true;
+    onSubmit() {
+        this.submitted = true;
 
-      if (this.registerForm.invalid) {
-          return;
-      }
+        if (this.registerForm.invalid) {
+            return;
+        }
 
-      console.log("que viene aca" + JSON.stringify(this.registerForm.get("username").value));
-      
-
-      this.loading = true;
-      this.userService.register(this.registerForm.value)
-          .pipe(first())
-          .subscribe(
-              data => {
-                  console.log("que vien en data? ", data);
-                  this.router.navigate(['/login']);
-              },
-              error => {
-                  this.loading = false;
-              });
-  }
+        this.loading = true;
+        this.userService.register(this.registerForm.value)
+            .pipe(first())
+            .subscribe(
+                () => this.router.navigate(['/login']),
+                () => this.loading = false);
+    }
 }

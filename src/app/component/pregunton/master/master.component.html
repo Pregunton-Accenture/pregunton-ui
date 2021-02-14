@@ -1,15 +1,14 @@
 <header>
     <div>
         <span>Código: {{ game.code }}</span>
+        <span>Palabra a adivinar: {{ game.hit }}</span>
     </div>
 </header>
 <section>
     <article *ngFor="let item of unansweredQuestions">
         <p>{{ item.question }}</p>
         <footer>
-            <button (click)="answerQuestion(item.id, 'SI')">Si</button>
-            <button (click)="answerQuestion(item.id, 'TAL_VEZ')">Tal vez</button>
-            <button (click)="answerQuestion(item.id, 'NO')">No</button>
+            <button (click)="answerQuestion(item.id, answer)" *ngFor="let answer of answers">{{ answer.replace('_', ' ') }}</button>
         </footer>
     </article>
 </section>

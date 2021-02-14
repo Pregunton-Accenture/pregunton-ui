@@ -11,7 +11,6 @@ import { first } from 'rxjs/operators';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
-  returnUrl: string = "/";
   loading = false;
   submitted = false;
   
@@ -46,7 +45,7 @@ export class LoginComponent implements OnInit {
       .subscribe(
         data => {
             this.loading = false;
-            this.router.navigate([this.returnUrl]);
+            this.router.navigate(['']);
         },
         error => {
             this.loading = false;
